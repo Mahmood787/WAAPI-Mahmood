@@ -1,38 +1,76 @@
-.App {
-  text-align: center;
+body{
+  overflow: hidden;
+  background: url('./images/background.jpg');
+  width: 100%;
+}
+.main{
+  position: absolute;
+}
+.cloud2{
+  position: relative;
+  left: 700%;
+  width: 150px;
+}
+.cloud1{
+  width:150px;
+  position: absolute;
+  left: 700%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cloud3{
+  width:150px;
+  position: absolute;
+  left: 700%;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* bottm  */
+.cat{
+  width: 100px;
+  top:80%;
+  left: 55%;
+  position:absolute;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.grass{
+  width: 100%;
+  position: fixed;;
+  top:87%;
 }
-
-.App-link {
-  color: #61dafb;
+.walking{
+  width: 200px;
+  position: fixed;
+  top: 56%;
+  left: 19%;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.palm{
+  position: fixed;
+  top: 36%;
+  left: 100%;
+  width: 12%;
+}
+.pawn{
+  position: fixed;
+  top: 70%;
+  left: 100%;
+  width: 12%;
+}
+/* RedQueenAlice */
+#red-queen_and_alice {
+	position: absolute;
+	top: 75%;
+	left: 40%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	width: 20%;
+  max-width: 450px; /*height: 783px / 2*/
+	z-index: 1;
+}
+#red-queen_and_alice img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+#red-queen_and_alice:before {
+	content: " ";
+	display: block;
+	padding-top: 87%;
 }
