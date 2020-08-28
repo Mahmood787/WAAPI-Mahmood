@@ -72,20 +72,22 @@ const cloudAnim2 = useWebAnimations({
       }
       //  The useEffect
     useEffect(()=>{
+      let x = playbackRateCloud;
+      let y = playbackrateRQ;
       // Adjusting Playback rate
       setInterval(()=>{
         document.addEventListener('click', goFasterCloud)
-        if(playbackRateCloud >=.8){
-          playbackRateCloud*=.9;
-          playbackrateRQ*=.9;
+        if(x >=.8){
+          x*=.9;
+          y*=.9;
           redQueenAlice.getAnimation().playbackRate= playbackrateRQ;
-          cloudAnim1.getAnimation().playbackRate =playbackRateCloud;
-          cloudAnim2.getAnimation().playbackRate =playbackRateCloud;
-          cloudAnim3.getAnimation().playbackRate =playbackRateCloud;
-          cloudAnim4.getAnimation().playbackRate =playbackRateCloud;
+          cloudAnim1.getAnimation().playbackRate =x;
+          cloudAnim2.getAnimation().playbackRate =x;
+          cloudAnim3.getAnimation().playbackRate =x;
+          cloudAnim4.getAnimation().playbackRate =x;
           palmAnim.getAnimation().playbackRate = playbackrateRQ;
           pawnAnim.getAnimation().playbackRate = playbackrateRQ;
-          console.log(playbackRateCloud)
+          console.log(x)
         }
         else {
           cloudAnim1.getAnimation().playbackRate =-1;
@@ -98,13 +100,13 @@ const cloudAnim2 = useWebAnimations({
       },3800)
       // redQueenAlice
       document.addEventListener('click', ()=>{
-        playbackrateRQ*=1.1;
-        redQueenAlice.getAnimation().playbackRate=playbackrateRQ;
-        palmAnim.getAnimation().playbackRate = playbackrateRQ/2;
-        pawnAnim.getAnimation().playbackRate = playbackrateRQ/2;
+        y*=1.1;
+        redQueenAlice.getAnimation().playbackRate=y;
+        palmAnim.getAnimation().playbackRate = y/2;
+        pawnAnim.getAnimation().playbackRate = y/2;
 
       })
-    },[]) 
+    }) 
     console.log(playbackRateCloud)
     //cat animation
     const catAnim = useWebAnimations({
