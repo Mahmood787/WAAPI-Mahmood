@@ -9,7 +9,8 @@ import palm from './images/palm.png'
 import './App.css';
 
 function App() {
-  let playbackRateCloud = 2;
+  let playbackRateCloud = 1;
+  let playbackrateRQ = 1;
 const keyf = [
   // {transform: "translateX(100%)"},
   {transform: "translateX(-800%)"}
@@ -62,51 +63,49 @@ const cloudAnim2 = useWebAnimations({
           iterations: Infinity,  
         }
       })
-      function goFasterCloud(){
-        playbackRateCloud*=1.1;
+      const cloudPlaybackAdjust=()=>{
+        if(playbackrateRQ<.8){
+          playbackRateCloud= (playbackrateRQ/2) * -1
+        }
+        else if (playbackrateRQ>1.2){
+          playbackRateCloud = playbackrateRQ/2
+        }
+        else{
+          playbackRateCloud= 1;
+        }
         cloudAnim1.getAnimation().playbackRate=playbackRateCloud;
         cloudAnim2.getAnimation().playbackRate=playbackRateCloud;
         cloudAnim3.getAnimation().playbackRate=playbackRateCloud;
         cloudAnim4.getAnimation().playbackRate=playbackRateCloud;
-        console.log(playbackRateCloud)
+        pawnAnim.getAnimation().playbackRate=playbackRateCloud/2;
+        palmAnim.getAnimation().playbackRate=playbackRateCloud/2;
       }
+      
       //  The useEffect
     useEffect(()=>{
-      let x = playbackRateCloud;
-      let y = playbackrateRQ;
-      // Adjusting Playback rate
+      const cloudAnim1x = cloudAnim1.getAnimation();
+      const cloudAnim2x = cloudAnim2.getAnimation();
+      const cloudAnim3x = cloudAnim3.getAnimation();
+      const cloudAnim4x = cloudAnim4.getAnimation();
+      cloudAnim1x.currentTime = cloudAnim1x.effect.getTiming().duration/2;
+      cloudAnim2x.currentTime = cloudAnim2x.effect.getTiming().duration/2;
+      cloudAnim3x.currentTime = cloudAnim3x.effect.getTiming().duration/2;
+      cloudAnim4x.currentTime = cloudAnim4x.effect.getTiming().duration/2;
       setInterval(()=>{
-        document.addEventListener('click', goFasterCloud)
-        if(x >=.8){
-          x*=.9;
-          y*=.9;
-          redQueenAlice.getAnimation().playbackRate= playbackrateRQ;
-          cloudAnim1.getAnimation().playbackRate =x;
-          cloudAnim2.getAnimation().playbackRate =x;
-          cloudAnim3.getAnimation().playbackRate =x;
-          cloudAnim4.getAnimation().playbackRate =x;
+        if(playbackrateRQ>.4){
+          playbackrateRQ*=.9;
           palmAnim.getAnimation().playbackRate = playbackrateRQ;
-          pawnAnim.getAnimation().playbackRate = playbackrateRQ;
-          console.log(x)
         }
-        else {
-          cloudAnim1.getAnimation().playbackRate =-1;
-          cloudAnim2.getAnimation().playbackRate =-1;
-          cloudAnim3.getAnimation().playbackRate =-1;
-          cloudAnim4.getAnimation().playbackRate =-1;
-          catAnim.getAnimation().playbackRate =-1;
-        }
-      
-      },3800)
+        cloudPlaybackAdjust()
+        console.log(playbackRateCloud, playbackrateRQ)
+      },3000)
       // redQueenAlice
       document.addEventListener('click', ()=>{
-        y*=1.1;
-        redQueenAlice.getAnimation().playbackRate=y;
-        palmAnim.getAnimation().playbackRate = y/2;
-        pawnAnim.getAnimation().playbackRate = y/2;
-
+        playbackrateRQ*=1.1;
+        redQueenAlice.getAnimation().playbackRate=playbackrateRQ;
+        cloudPlaybackAdjust();
       })
-    }) 
+    },[]) 
     console.log(playbackRateCloud)
     //cat animation
     const catAnim = useWebAnimations({
@@ -116,7 +115,6 @@ const cloudAnim2 = useWebAnimations({
         }
       })
 // Alice Sprite
-let playbackrateRQ = 1;
 const spriteFrames = [
   { transform: "translateY(0)" },
   { transform: "translateY(-100%)" },
